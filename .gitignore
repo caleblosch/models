@@ -96,3 +96,8 @@ ENV/
 
 # For mac
 .DS_Store
+
+# Training files
+research/object_detection/images/*
+research/object_detection/test.record
+research/object_detection/train.record
