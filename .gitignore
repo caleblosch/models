@@ -101,3 +101,6 @@ ENV/
 research/object_detection/images/*
 research/object_detection/test.record
 research/object_detection/train.record
+research/object_detection/training/*
+!research/object_detection/training/train
+research/object_detection/training/train/*
