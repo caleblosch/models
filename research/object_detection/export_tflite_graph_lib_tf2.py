@@ -140,10 +140,15 @@ class SSDModule(tf.Module):
         experimental_implements=self.postprocess_implements_signature())
     # pylint: disable=g-unused-argument,unused-argument
     def dummy_post_processing(box_encodings, class_predictions, anchors):
-      boxes = tf.constant(0.0, dtype=tf.float32, name='boxes')
-      scores = tf.constant(0.0, dtype=tf.float32, name='scores')
-      classes = tf.constant(0.0, dtype=tf.float32, name='classes')
-      num_detections = tf.constant(0.0, dtype=tf.float32, name='num_detections')
+      max_detections = self._max_detections  # from your config (e.g. 10)
+      boxes = tf.reshape(tf.constant(0.0, dtype=tf.float32, name='boxes'),
+                        [1, max_detections, 4])
+      scores = tf.reshape(tf.constant(0.0, dtype=tf.float32, name='scores'),
+                          [1, max_detections])
+      classes = tf.reshape(tf.constant(0.0, dtype=tf.float32, name='classes'),
+                          [1, max_detections])
+      num_detections = tf.reshape(tf.constant(0.0, dtype=tf.float32, name='num_detections'),
+                                  [1])
       return boxes, classes, scores, num_detections
 
     return dummy_post_processing
